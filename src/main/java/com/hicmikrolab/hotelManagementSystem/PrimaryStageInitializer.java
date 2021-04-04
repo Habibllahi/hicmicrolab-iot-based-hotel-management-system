@@ -18,23 +18,31 @@ import java.net.URL;
 
 /**
  * <p>
- *     This class is self called. Its a listener to respond to any published StageReadyEvent.
+ *     This class is self called. Its a listener to respond to a published StageReadyEvent.
  *     <code>StageReadyEvent</code> is a custom ApplicationEvent for our JavaFX application and subclass of
  *     <code>org.springframework.context.ApplicationEvent</code>
+ *
+ *     The sole action of this Listener class is create the Primary stage for the application and load the Scene graph described by the
+ *     <code>MainController.fxml</code>
  * </p>
  */
 @Component
 public class PrimaryStageInitializer implements ApplicationListener<StageReadyEvent> {
 
     @Value("${spring.application.ui.title}")
-    private String applicationTitle;
+    private String applicationTitle; //Spring injects the value of spring.application.ui.title from the application.properties file
     @Value("classpath:/MainController.fxml")
-    private Resource fxml;
+    private Resource fxml; //Spring injects the path to MainController.fxml as a resource path
 
     @Autowired
-    ApplicationContext applicationContext;
+    ApplicationContext applicationContext; //Spring Injects its application context as a dependency for this StageReadyEvent Application Listener class
 
 
+    /**
+     * This method is called as response to a StageReadyEvent being handled by this Listener.
+     * Am using this method to create the Primary Stage of this Application.
+     * @param event
+     */
     @Override
     public void onApplicationEvent(StageReadyEvent event) {
         try{
@@ -44,7 +52,7 @@ public class PrimaryStageInitializer implements ApplicationListener<StageReadyEv
             FXMLLoader fxmlLoader = new FXMLLoader(url);
             fxmlLoader.setControllerFactory(applicationContext::getBean);
             Parent root = fxmlLoader.load();
-            Scene scene = new Scene(root,1300,680);
+            Scene scene = new Scene(root,600,400);
             stage.setTitle(this.applicationTitle);
             stage.setScene(scene);
             stage.setResizable(false);
