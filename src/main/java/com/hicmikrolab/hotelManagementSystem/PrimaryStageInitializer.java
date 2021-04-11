@@ -23,7 +23,7 @@ import java.net.URL;
  *     <code>org.springframework.context.ApplicationEvent</code>
  *
  *     The sole action of this Listener class is create the Primary stage for the application and load the Scene graph described by the
- *     <code>MainController.fxml</code>
+ *     <code>MainView.fxml</code>
  * </p>
  */
 @Component
@@ -31,8 +31,8 @@ public class PrimaryStageInitializer implements ApplicationListener<StageReadyEv
 
     @Value("${spring.application.ui.title}")
     private String applicationTitle; //Spring injects the value of spring.application.ui.title from the application.properties file
-    @Value("classpath:/MainController.fxml")
-    private Resource fxml; //Spring injects the path to MainController.fxml as a resource path
+    @Value("classpath:/MainView.fxml")
+    private Resource fxml; //Spring injects the path to MainView.fxml as a resource path
 
     @Autowired
     ApplicationContext applicationContext; //Spring Injects its application context as a dependency for this StageReadyEvent Application Listener class
@@ -52,7 +52,7 @@ public class PrimaryStageInitializer implements ApplicationListener<StageReadyEv
             FXMLLoader fxmlLoader = new FXMLLoader(url);
             fxmlLoader.setControllerFactory(applicationContext::getBean);
             Parent root = fxmlLoader.load();
-            Scene scene = new Scene(root,600,400);
+            Scene scene = new Scene(root,1000,600);
             stage.setTitle(this.applicationTitle);
             stage.setScene(scene);
             stage.setResizable(false);

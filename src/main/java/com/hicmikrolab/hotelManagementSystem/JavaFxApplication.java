@@ -60,7 +60,7 @@ public class JavaFxApplication extends Application {
     public void init() throws Exception {
         ApplicationContextInitializer<GenericApplicationContext> initializer = (applicationContext)->{
             applicationContext.registerBean(Application.class,() -> JavaFxApplication.this); //registers the JavaFx Application as a Spring bean itself
-            applicationContext.registerBean(Application.Parameters.class,() ->getParameters());//registers the JavaFX Application environment parameters as Spring bean
+            applicationContext.registerBean(Application.Parameters.class,() -> getParameters());//registers the JavaFX Application environment parameters as Spring bean
             applicationContext.registerBean(HostServices.class,() ->getHostServices());//register the JavaFX host services as spring bean
         };
 

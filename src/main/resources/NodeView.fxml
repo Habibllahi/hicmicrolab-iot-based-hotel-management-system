@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableView?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="NodeView"
-            prefHeight="400.0" prefWidth="600.0" >
-
-</AnchorPane>
+<ScrollPane fx:id="root_pane" hbarPolicy="NEVER" maxHeight="600.0" maxWidth="900.0" minHeight="600.0" minWidth="900.0" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hicmikrolab.hotelManagementSystem.controller.NodeController">
+   <content>
+      <TableView id="node_table_view" fx:id="node_table_view" editable="true" maxHeight="600.0" maxWidth="900.0" minHeight="600.0" minWidth="900.0" prefHeight="600.0" prefWidth="900.0" styleClass="node_table_view_class" stylesheets="@NodeViewStyle.css" />
+   </content>
+</ScrollPane>
