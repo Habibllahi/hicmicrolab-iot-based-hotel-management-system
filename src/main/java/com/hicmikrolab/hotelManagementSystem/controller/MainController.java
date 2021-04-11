@@ -4,10 +4,11 @@
 package com.hicmikrolab.hotelManagementSystem.Controller;
 
 import com.hicmikrolab.hotelManagementSystem.Utility.Apartment;
-import com.hicmikrolab.hotelManagementSystem.Utility.Network;
+import com.hicmikrolab.hotelManagementSystem.Utility.NetworkInterface;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import java.io.IOException;
@@ -25,6 +26,8 @@ import java.io.IOException;
 @Controller
 public class MainController {
 
+    @Autowired
+    NetworkInterface network;
     @FXML
     public Button klikBtn;
 
@@ -36,11 +39,7 @@ public class MainController {
        this.klikBtn.setOnAction(
                actionEvent-> {
                    try {
-                       System.out.println(Network.getLocalHostIp());
-                       if(Network.sendPingRequest(Apartment.ROOM_1.getIp()))
-                           System.out.println(Apartment.ROOM_1.getIp()+" is online");
-                       else
-                           System.out.println(Apartment.ROOM_1.getIp()+" is offline");
+                       System.out.println(Apartment.ROOM_1.getIp()+ (network.sendPingRequest(Apartment.ROOM_1.getIp()) ? " online" : " ofline"));
                    } catch (IOException e) {
                        e.printStackTrace();
                    }
